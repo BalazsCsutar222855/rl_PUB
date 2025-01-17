@@ -1,7 +1,7 @@
 import wandb
 import os
 import argparse
-from stable_baselines3 import SAC
+from stable_baselines3 import PPO
 from stable_baselines3.common.callbacks import BaseCallback, EvalCallback
 from new_env import CustomEnv  # Assuming CustomEnv is in this file
 from stable_baselines3.common.monitor import Monitor
@@ -31,7 +31,7 @@ task.set_base_docker('deanis/2023y2b-rl:latest')  # Set docker image for remote 
 task.execute_remotely(queue_name="default")  # Set task to run remotely on ClearML's default queue
 
 # Set up SAC model with the custom environment, command-line arguments, and TensorBoard logging
-model = SAC('MlpPolicy', env, verbose=1, 
+model = PPO('MlpPolicy', env, verbose=1, 
             learning_rate=args.learning_rate, 
             batch_size=args.batch_size, 
             n_steps=args.n_steps, 
