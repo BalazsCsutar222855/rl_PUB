@@ -6,6 +6,8 @@ from stable_baselines3.common.callbacks import BaseCallback, EvalCallback
 from new_env import CustomEnv  # Assuming CustomEnv is in this file
 from stable_baselines3.common.monitor import Monitor
 from clearml import Task
+import typing_extensions 
+from tensorflow.keras.callbacks import TensorBoard
 
 # Initialize command-line argument parser for hyperparameters
 parser = argparse.ArgumentParser()
@@ -14,7 +16,7 @@ parser.add_argument("--batch_size", type=int, default=64)
 parser.add_argument("--n_steps", type=int, default=1000)  # 1000 steps per iteration
 parser.add_argument("--n_epochs", type=int, default=10)
 parser.add_argument("--episodes", type=int, default=10)  # Total number of episodes
-parser.add_argument("--iterations_per_episode", type=int, default=200000)  # Iterations per episode
+parser.add_argument("--iterations_per_episode", type=int, default=20000)  # Iterations per episode
 args = parser.parse_args()
 
 # Set WandB API key and initialize the project
@@ -25,7 +27,7 @@ wandb.init(project="sb3_custom_env", sync_tensorboard=True)
 env = CustomEnv()
 
 # Initialize ClearML task for remote training setup
-task = Task.init(project_name='Mentor Group M/Group 2', task_name='Experiment1')
+task = Task.init(project_name='Mentor Group M/Group 2', task_name='Balazs')
 task.set_base_docker('deanis/2023y2b-rl:latest')  # Set docker image for remote training
 task.execute_remotely(queue_name="default")  # Set task to run remotely on ClearML's default queue
 

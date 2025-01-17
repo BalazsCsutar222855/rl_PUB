@@ -106,7 +106,7 @@ class CustomEnv(gym.Env):
         reward -= 0.1
 
         # Check if the task is done
-        terminated = bool(distance_to_goal < 1.5) 
+        terminated = bool(distance_to_goal < 0.05) 
 
         if terminated:
             reward += 10  # Big reward for being near to the goal
