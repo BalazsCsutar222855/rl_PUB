@@ -75,7 +75,7 @@ class CustomEnv(gym.Env):
 
         # Check if the maximum number of steps is reached
         if self.current_step >= self.max_steps:
-            terminated = True
+            terminated = bool(self.current_step >= self.max_steps)
 
         truncated = False
 
@@ -86,18 +86,28 @@ class CustomEnv(gym.Env):
 
     def _calculate_reward(self, pipette):
         distance_to_goal = np.linalg.norm(np.array(self.goal) - pipette)
+
+        # Base reward for proximity to goal
         reward = -distance_to_goal
+
+        # Reward progress
         if hasattr(self, 'previous_distance_to_goal'):
             progress_reward = self.previous_distance_to_goal - distance_to_goal
-            reward += progress_reward * 0.2
+            reward += progress_reward * 1.0  # Emphasize progress
         self.previous_distance_to_goal = distance_to_goal
 
-        action_magnitude = np.linalg.norm([random.uniform(-1, 1), random.uniform(-1, 1), random.uniform(-1, 1)])
-        reward -= 0.01 * action_magnitude
-        reward -= 0.05
+        # Proximity bonus
+        if distance_to_goal < 1.5:
+            reward += 5 * (1.5 - distance_to_goal)  # Higher reward closer to goal
 
+        # Reduce action penalty
+        action_magnitude = np.linalg.norm([random.uniform(-1, 1), random.uniform(-1, 1), random.uniform(-1, 1)])
+        reward -= 0.001 * action_magnitude  # Lower penalty
+        reward -= 0.005  # Lower time penalty
+
+        # Termination condition
         terminated = bool(distance_to_goal < 1)
         if terminated:
-            reward += 10
-        
+            reward += 10  # Large reward for reaching the goal
+
         return reward, terminated
