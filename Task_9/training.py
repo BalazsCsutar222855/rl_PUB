@@ -26,7 +26,7 @@ wandb.init(project="sb3_custom_env", sync_tensorboard=True)
 env = CustomEnv()
 
 # Initialize ClearML task for remote training setup
-task = Task.init(project_name='Mentor Group M/Group 2', task_name='Balazs')
+task = Task.init(project_name='Mentor Group M/Group 2', task_name='RL_SAC_CustomEnv')
 task.set_base_docker('deanis/2023y2b-rl:latest')  # Set docker image for remote training
 task.execute_remotely(queue_name="default")  # Set task to run remotely on ClearML's default queue
 
@@ -37,8 +37,6 @@ model = SAC('MlpPolicy', env, verbose=1,
             n_steps=args.n_steps, 
             n_epochs=args.n_epochs, 
             tensorboard_log=f"./ppo_custom_env_tensorboard/{wandb.run.id}/")
-
-print(f"Starting episode {episode}/{args.episodes}")
 
 # Total steps per episode = iterations * steps per iteration
 total_timesteps = args.iterations * 100000
