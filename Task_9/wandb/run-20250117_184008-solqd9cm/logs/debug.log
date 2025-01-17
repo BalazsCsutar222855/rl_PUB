@@ -1,0 +1,22 @@
+2025-01-17 18:40:08,793 INFO    MainThread:53608 [wandb_setup.py:_flush():68] Current SDK version is 0.19.2
+2025-01-17 18:40:08,794 INFO    MainThread:53608 [wandb_setup.py:_flush():68] Configure stats pid to 53608
+2025-01-17 18:40:08,794 INFO    MainThread:53608 [wandb_setup.py:_flush():68] Loading settings from /home/balage/.config/wandb/settings
+2025-01-17 18:40:08,794 INFO    MainThread:53608 [wandb_setup.py:_flush():68] Loading settings from /home/balage/School/2024-25b-fai2-adsai-BalazsCsutar222855/rl_PUB/Task_9/wandb/settings
+2025-01-17 18:40:08,794 INFO    MainThread:53608 [wandb_setup.py:_flush():68] Loading settings from environment variables
+2025-01-17 18:40:08,794 INFO    MainThread:53608 [wandb_init.py:_log_setup():523] Logging user logs to /home/balage/School/2024-25b-fai2-adsai-BalazsCsutar222855/rl_PUB/Task_9/wandb/run-20250117_184008-solqd9cm/logs/debug.log
+2025-01-17 18:40:08,794 INFO    MainThread:53608 [wandb_init.py:_log_setup():524] Logging internal logs to /home/balage/School/2024-25b-fai2-adsai-BalazsCsutar222855/rl_PUB/Task_9/wandb/run-20250117_184008-solqd9cm/logs/debug-internal.log
+2025-01-17 18:40:08,794 INFO    MainThread:53608 [wandb_init.py:init():641] calling init triggers
+2025-01-17 18:40:08,794 INFO    MainThread:53608 [wandb_init.py:init():647] wandb.init called with sweep_config: {}
+config: {}
+2025-01-17 18:40:08,794 INFO    MainThread:53608 [wandb_init.py:init():674] starting backend
+2025-01-17 18:40:08,999 INFO    MainThread:53608 [wandb_init.py:init():678] sending inform_init request
+2025-01-17 18:40:09,002 INFO    MainThread:53608 [backend.py:_multiprocessing_setup():104] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2025-01-17 18:40:09,002 INFO    MainThread:53608 [wandb_init.py:init():693] backend started and connected
+2025-01-17 18:40:09,004 INFO    MainThread:53608 [wandb_init.py:init():786] updated telemetry
+2025-01-17 18:40:09,007 INFO    MainThread:53608 [wandb_init.py:init():818] communicating run to backend with 90.0 second timeout
+2025-01-17 18:40:09,370 INFO    MainThread:53608 [wandb_init.py:init():868] starting run threads in backend
+2025-01-17 18:40:09,606 INFO    MainThread:53608 [wandb_run.py:_console_start():2415] atexit reg
+2025-01-17 18:40:09,606 INFO    MainThread:53608 [wandb_run.py:_redirect():2265] redirect: wrap_raw
+2025-01-17 18:40:09,606 INFO    MainThread:53608 [wandb_run.py:_redirect():2330] Wrapping output streams.
+2025-01-17 18:40:09,607 INFO    MainThread:53608 [wandb_run.py:_redirect():2355] Redirects installed.
+2025-01-17 18:40:09,609 INFO    MainThread:53608 [wandb_init.py:init():910] run started, returning control to user process
