@@ -15,7 +15,7 @@ class CustomEnv(gym.Env):
         self.sim = Simulation(num_agents=1, render=render)
 
         self.action_space = spaces.Discrete(6)
-        self.observation_space = spaces.Box(low=0, high=1, shape=(6,), dtype=np.float64)
+        self.observation_space = spaces.Box(low=-1, high=1, shape=(6,), dtype=np.float64)
 
         self.goal = [0, 0, 0]
         self.reward = 0
@@ -50,39 +50,47 @@ class CustomEnv(gym.Env):
         # Increment step counter
         self.current_step += 1
 
-        # Action logic
-        velocity_x = random.uniform(-1, 1)
-        velocity_y = random.uniform(-1, 1)
-        velocity_z = random.uniform(-1, 1)
-        drop_command = self.ink
+        # Define velocities to guide toward the goal
+        velocity_x = np.clip(self.goal[0] - self.observation[0], -1, 1)
+        velocity_y = np.clip(self.goal[1] - self.observation[1], -1, 1)
+        velocity_z = np.clip(self.goal[2] - self.observation[2], -1, 1)
+        drop_command = self.ink  # Assuming ink is independent of the goal
 
         actions = [[velocity_x, velocity_y, velocity_z, drop_command],
-                   [velocity_x, velocity_y, velocity_z, drop_command]]
+                [velocity_x, velocity_y, velocity_z, drop_command]]
         
+        # Execute the action in the simulation
         state = self.sim.run(actions)
 
-        robot_id = next(iter(state))  
+        # Extract pipette position from simulation state
+        robot_id = next(iter(state))
         pipette = np.array(state[robot_id]['pipette_position'], dtype=np.float32)
 
+        # Update the observation
         pipette_delta_x = self.goal[0] - pipette[0]
         pipette_delta_y = self.goal[1] - pipette[1]
         pipette_delta_z = self.goal[2] - pipette[2]
 
         self.observation = np.concatenate([pipette, [pipette_delta_x, pipette_delta_y, pipette_delta_z]])
 
-        # Calculate reward
+        # Calculate reward and check termination
         self.reward, terminated = self._calculate_reward(pipette)
 
-        # Check if the maximum number of steps is reached
+        # Check for step limit
         if self.current_step >= self.max_steps:
-            terminated = bool(self.current_step >= self.max_steps)
+            terminated = True
 
         truncated = False
 
-        # Debugging statements
-        print(f"Step {self.current_step}/{self.max_steps}, distance_to_goal: {np.linalg.norm(np.array(self.goal) - pipette)}, terminated: {terminated}, truncated: {truncated}")
+        # Log for debugging
+        print(f"Step {self.current_step}:")
+        print(f"  Pipette Position: {pipette}")
+        print(f"  Goal Position: {self.goal}")
+        print(f"  Distance to Goal: {np.linalg.norm(np.array(self.goal) - pipette)}")
+        print(f"  Reward: {self.reward}")
 
         return self.observation, self.reward, terminated, truncated, {}
+
 
     def _calculate_reward(self, pipette):
         distance_to_goal = np.linalg.norm(np.array(self.goal) - pipette)
