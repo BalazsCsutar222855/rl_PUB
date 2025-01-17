@@ -6,7 +6,7 @@ from stable_baselines3.common.callbacks import BaseCallback, EvalCallback
 from new_env import CustomEnv  # Assuming CustomEnv is in this file
 from stable_baselines3.common.monitor import Monitor
 from clearml import Task
-import typing_extensions
+import typing_extensions 
 from tensorflow.keras.callbacks import TensorBoard
 
 # Initialize command-line argument parser for hyperparameters
@@ -24,7 +24,7 @@ os.environ['WANDB_API_KEY'] = '8afbb298b3eae0f6035d2e3b3bdcadf08ebb1a41'  # Use 
 wandb.init(project="sb3_custom_env", sync_tensorboard=True)
 
 # Set up the environment
-env = CustomEnv(render=True)  # Ensure render is enabled in the environment
+env = CustomEnv()
 
 # Initialize ClearML task for remote training setup
 task = Task.init(project_name='Mentor Group M/Group 2', task_name='Balazs')
@@ -43,11 +43,11 @@ model = PPO('MlpPolicy', env, verbose=1,
 for episode in range(1, args.episodes + 1):
     print(f"Starting episode {episode}/{args.episodes}")
 
-    # Total steps per episode = iterations * steps per iteration
-    total_timesteps = args.iterations_per_episode * args.n_steps  # 200,000 iterations * 1,000 steps/iteration
-
     # Reset environment for the new episode
     env.reset()
+
+    # Total steps per episode = iterations * steps per iteration
+    total_timesteps = args.iterations_per_episode * args.n_steps  # 200,000 iterations * 1,000 steps/iteration
 
     # Train the model for the calculated number of timesteps
     model.learn(total_timesteps=total_timesteps, reset_num_timesteps=False, tb_log_name=f"PPO_run_{wandb.run.id}_episode_{episode}")
@@ -57,9 +57,6 @@ for episode in range(1, args.episodes + 1):
     
     # Log the model checkpoint to WandB
     wandb.save(f"ppo_model_episode_{episode}.zip")
-
-    # Ensure rendering at the end of the episode, especially if termination occurs
-    env.render()
 
 # Finish WandB logging after training is complete
 wandb.finish()

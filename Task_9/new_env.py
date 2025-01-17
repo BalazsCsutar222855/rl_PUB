@@ -78,10 +78,6 @@ class CustomEnv(gym.Env):
         else:
             truncated = False
 
-        # Render the final state if necessary
-        if terminated:
-            self.render()
-
         return self.observation, self.reward, terminated, truncated, {}
 
     def render(self, mode='human'):
