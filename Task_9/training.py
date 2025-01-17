@@ -42,10 +42,7 @@ model = PPO('MlpPolicy', env, verbose=1,
 # Training loop for a specific number of episodes
 for episode in range(1, args.episodes + 1):
     print(f"Starting episode {episode}/{args.episodes}")
-
-    # Reset environment for the new episode
-    env.reset()
-
+    
     # Total steps per episode = iterations * steps per iteration
     total_timesteps = 100000
 

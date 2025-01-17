@@ -1,0 +1,42 @@
+{
+  "os":  "Linux-6.1.0-28-amd64-x86_64-with-glibc2.36",
+  "python":  "CPython 3.12.2",
+  "startedAt":  "2025-01-17T16:34:46.442031Z",
+  "program":  "/home/balage/School/2024-25b-fai2-adsai-BalazsCsutar222855/rl_PUB/Task_9/training.py",
+  "codePath":  "Task_9/training.py",
+  "git":  {
+    "remote":  "https://github.com/BalazsCsutar222855/rl_PUB.git",
+    "commit":  "1f6dcf499c2ef8ee3feab0fbcdda6309bda70e6f"
+  },
+  "email":  "222855@buas.nl",
+  "root":  "/home/balage/School/2024-25b-fai2-adsai-BalazsCsutar222855/rl_PUB/Task_9",
+  "host":  "EndeavourOS",
+  "executable":  "/home/balage/anaconda3/bin/python",
+  "codePathLocal":  "training.py",
+  "cpu_count":  4,
+  "cpu_count_logical":  8,
+  "gpu":  "NVIDIA GeForce RTX 4060",
+  "gpu_count":  1,
+  "disk":  {
+    "/":  {
+      "total":  "242946465792",
+      "used":  "228362252288"
+    }
+  },
+  "memory":  {
+    "total":  "16676966400"
+  },
+  "cpu":  {
+    "count":  4,
+    "countLogical":  8
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA GeForce RTX 4060",
+      "memoryTotal":  "8585740288",
+      "cudaCores":  3072,
+      "architecture":  "Ada"
+    }
+  ],
+  "cudaVersion":  "12.2"
+}
