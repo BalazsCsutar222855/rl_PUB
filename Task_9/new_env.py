@@ -86,28 +86,22 @@ class CustomEnv(gym.Env):
 
     def _calculate_reward(self, pipette):
         distance_to_goal = np.linalg.norm(np.array(self.goal) - pipette)
-
-        # Base reward for proximity to goal
+        
+        # Base reward: penalize distance to the goal
         reward = -distance_to_goal
 
-        # Reward progress
+        # Reward for progress (if applicable)
         if hasattr(self, 'previous_distance_to_goal'):
-            progress_reward = self.previous_distance_to_goal - distance_to_goal
-            reward += progress_reward * 1.0  # Emphasize progress
+            reward += self.previous_distance_to_goal - distance_to_goal
         self.previous_distance_to_goal = distance_to_goal
 
-        # Proximity bonus
+        # Bonus for proximity to the goal
         if distance_to_goal < 1.5:
-            reward += 5 * (1.5 - distance_to_goal)  # Higher reward closer to goal
+            reward += 5 * (1.5 - distance_to_goal)
 
-        # Reduce action penalty
-        action_magnitude = np.linalg.norm([random.uniform(-1, 1), random.uniform(-1, 1), random.uniform(-1, 1)])
-        reward -= 0.001 * action_magnitude  # Lower penalty
-        reward -= 0.005  # Lower time penalty
-
-        # Termination condition
-        terminated = bool(distance_to_goal < 1)
+        # Termination condition: reached the goal
+        terminated = distance_to_goal < 1
         if terminated:
-            reward += 10  # Large reward for reaching the goal
+            reward += 10  # Big reward for success
 
         return reward, terminated
