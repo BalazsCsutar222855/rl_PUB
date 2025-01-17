@@ -119,11 +119,11 @@ class CustomEnv(gym.Env):
         self.previous_distance_to_goal = distance_to_goal
 
         # Bonus for proximity to the goal
-        if distance_to_goal < 1.5:
-            reward += 5 * (1.5 - distance_to_goal)
+        if distance_to_goal < 1:
+            reward += 5 * (1 - distance_to_goal)
 
         # Termination condition: reached the goal
-        terminated = distance_to_goal < 1
+        terminated = distance_to_goal < 0.5
         if terminated:
             reward += 10  # Big reward for success
 
