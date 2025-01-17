@@ -16,7 +16,7 @@ parser.add_argument("--batch_size", type=int, default=64)
 parser.add_argument("--n_steps", type=int, default=1000)  # 1000 steps per iteration
 parser.add_argument("--n_epochs", type=int, default=10)
 parser.add_argument("--episodes", type=int, default=10)  # Total number of episodes
-parser.add_argument("--iterations_per_episode", type=int, default=20000)  # Iterations per episode
+parser.add_argument("--iterations_per_episode", type=int, default=2000)  # Iterations per episode
 args = parser.parse_args()
 
 # Set WandB API key and initialize the project
