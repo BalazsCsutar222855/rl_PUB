@@ -8,15 +8,16 @@ from collections import deque
 class CustomEnv(gym.Env):
     metadata = {'render.modes': ['human']}
 
-    def __init__(self, render=False):
+    def __init__(self, render=False, max_steps=100):
         super(CustomEnv, self).__init__()
         
-        # Now the render argument is accepted
+        # Initialize parameters
         self.render = render
         self.sim = Simulation(num_agents=1, render=render)
-
+        self.max_steps = max_steps  # Maximum number of steps per episode
+        self.current_step = 0  # Keep track of the current step in the episode
+        
         self.action_space = spaces.Discrete(6)
-
         self.observation_space = spaces.Box(low=-1, high=1, shape=(6,), dtype=np.float64)
 
         self.goal = [0, 0, 0]
@@ -25,13 +26,13 @@ class CustomEnv(gym.Env):
         self.ink = 0
 
     def reset(self, seed=None):
-        # Reset other environment states
-        # Goal position
+        # Reset environment for a new episode
         self.goal = [random.randint(0, 1), random.randint(0, 1), random.randint(0, 1)]
+        self.current_step = 0  # Reset the step counter
 
-        # Reset the simulation state
+        # Reset simulation state
         state = self.sim.reset(num_agents=1)
-        robot_id = next(iter(state))  
+        robot_id = next(iter(state))
         pipette = np.array(state[robot_id]['pipette_position'], dtype=np.float32)
 
         # Delta between pipette and goal
@@ -39,26 +40,25 @@ class CustomEnv(gym.Env):
         pipette_delta_y = self.goal[1] - pipette[1]
         pipette_delta_z = self.goal[2] - pipette[2]
 
-        # Flattening the observation array
         self.observation = np.concatenate([pipette, [pipette_delta_x, pipette_delta_y, pipette_delta_z]])
 
-        info = {}
-
-        return self.observation, info
+        return self.observation, {}
 
     def step(self, action):
-        # Action
+        # Increment step count
+        self.current_step += 1
+
+        # Action (Random velocities for the example)
         velocity_x = random.uniform(-1, 1)
         velocity_y = random.uniform(-1, 1)
         velocity_z = random.uniform(-1, 1)
         drop_command = self.ink
 
-        actions = [[velocity_x, velocity_y, velocity_z, drop_command],
-                   [velocity_x, velocity_y, velocity_z, drop_command]]
-        
+        actions = [[velocity_x, velocity_y, velocity_z, drop_command]]
+
         state = self.sim.run(actions)
 
-        robot_id = next(iter(state))  
+        robot_id = next(iter(state))
         pipette = np.array(state[robot_id]['pipette_position'], dtype=np.float32)
 
         # Update observation
@@ -70,32 +70,28 @@ class CustomEnv(gym.Env):
 
         # Calculate reward
         self.reward, terminated = self._calculate_reward(pipette)
-        truncated = False  # Task is not truncated in this setup
 
-        # Info (can include diagnostic information if needed)
-        self.info = {}
+        # If the goal is reached or max_steps is reached, terminate the episode
+        if terminated or self.current_step >= self.max_steps:
+            truncated = False
+            terminated = True
+        else:
+            truncated = False
 
-        # Debugging statements
-        print(f"distance_to_goal: {np.linalg.norm(np.array(self.goal) - pipette)}, terminated: {terminated}, truncated: {truncated}")
+        # Render the final state if necessary
+        if terminated:
+            self.render()
 
-        return self.observation, self.reward, terminated, truncated, self.info
+        return self.observation, self.reward, terminated, truncated, {}
 
     def render(self, mode='human'):
-
-        if self.render_flag:
+        if self.render:
             self.sim.render(mode)
-            
-    def _drop_ink(self):
-        if self.ink == 1:
-            self.ink = 0
-        else:
-            self.ink = 1
 
     def _calculate_reward(self, pipette):
         # Calculate distance to goal
         distance_to_goal = np.linalg.norm(np.array(self.goal) - pipette)
         
-        # Linear reward based on distance to goal
         reward = -distance_to_goal  # Linear penalty for distance to the goal
         
         # Reward progress: if the distance decreases, give a small bonus
