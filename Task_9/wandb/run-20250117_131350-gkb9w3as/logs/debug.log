@@ -1,0 +1,36 @@
+2025-01-17 13:13:50,818 INFO    MainThread:5001 [wandb_setup.py:_flush():68] Current SDK version is 0.19.2
+2025-01-17 13:13:50,818 INFO    MainThread:5001 [wandb_setup.py:_flush():68] Configure stats pid to 5001
+2025-01-17 13:13:50,818 INFO    MainThread:5001 [wandb_setup.py:_flush():68] Loading settings from /home/balage/.config/wandb/settings
+2025-01-17 13:13:50,818 INFO    MainThread:5001 [wandb_setup.py:_flush():68] Loading settings from /home/balage/School/2024-25b-fai2-adsai-BalazsCsutar222855/Deliverables/Task_9/wandb/settings
+2025-01-17 13:13:50,818 INFO    MainThread:5001 [wandb_setup.py:_flush():68] Loading settings from environment variables
+2025-01-17 13:13:50,818 INFO    MainThread:5001 [wandb_init.py:_log_setup():523] Logging user logs to /home/balage/School/2024-25b-fai2-adsai-BalazsCsutar222855/Deliverables/Task_9/wandb/run-20250117_131350-gkb9w3as/logs/debug.log
+2025-01-17 13:13:50,819 INFO    MainThread:5001 [wandb_init.py:_log_setup():524] Logging internal logs to /home/balage/School/2024-25b-fai2-adsai-BalazsCsutar222855/Deliverables/Task_9/wandb/run-20250117_131350-gkb9w3as/logs/debug-internal.log
+2025-01-17 13:13:50,819 INFO    MainThread:5001 [wandb_init.py:_jupyter_setup():469] configuring jupyter hooks <wandb.sdk.wandb_init._WandbInit object at 0x7f4448602870>
+2025-01-17 13:13:50,819 INFO    MainThread:5001 [wandb_init.py:init():641] calling init triggers
+2025-01-17 13:13:50,819 INFO    MainThread:5001 [wandb_init.py:init():647] wandb.init called with sweep_config: {}
+config: {}
+2025-01-17 13:13:50,819 INFO    MainThread:5001 [wandb_init.py:init():674] starting backend
+2025-01-17 13:13:51,024 INFO    MainThread:5001 [wandb_init.py:init():678] sending inform_init request
+2025-01-17 13:13:51,026 INFO    MainThread:5001 [backend.py:_multiprocessing_setup():104] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2025-01-17 13:13:51,026 INFO    MainThread:5001 [wandb_init.py:init():693] backend started and connected
+2025-01-17 13:13:51,033 INFO    MainThread:5001 [wandb_run.py:_label_probe_notebook():1226] probe notebook
+2025-01-17 13:13:51,034 INFO    MainThread:5001 [wandb_init.py:init():786] updated telemetry
+2025-01-17 13:13:51,040 INFO    MainThread:5001 [wandb_init.py:init():818] communicating run to backend with 90.0 second timeout
+2025-01-17 13:13:51,386 INFO    MainThread:5001 [wandb_init.py:init():868] starting run threads in backend
+2025-01-17 13:13:51,633 INFO    MainThread:5001 [wandb_run.py:_console_start():2415] atexit reg
+2025-01-17 13:13:51,634 INFO    MainThread:5001 [wandb_run.py:_redirect():2265] redirect: wrap_raw
+2025-01-17 13:13:51,634 INFO    MainThread:5001 [wandb_run.py:_redirect():2330] Wrapping output streams.
+2025-01-17 13:13:51,634 INFO    MainThread:5001 [wandb_run.py:_redirect():2355] Redirects installed.
+2025-01-17 13:13:51,636 INFO    MainThread:5001 [wandb_init.py:init():910] run started, returning control to user process
+2025-01-17 13:13:52,658 INFO    MainThread:5001 [wandb_run.py:_tensorboard_callback():1476] tensorboard callback: ./ppo_cartpole_tensorboard/PPO_4, True
+2025-01-17 13:13:57,773 INFO    MainThread:5001 [jupyter.py:save_ipynb():386] not saving jupyter notebook
+2025-01-17 13:13:57,773 INFO    MainThread:5001 [wandb_init.py:_pause_backend():434] pausing backend
+2025-01-17 14:00:58,358 INFO    MainThread:5001 [wandb_init.py:_resume_backend():439] resuming backend
+2025-01-17 14:00:58,863 INFO    MainThread:5001 [jupyter.py:save_ipynb():386] not saving jupyter notebook
+2025-01-17 14:00:58,863 INFO    MainThread:5001 [wandb_init.py:_pause_backend():434] pausing backend
+2025-01-17 14:00:58,882 INFO    MainThread:5001 [wandb_init.py:_resume_backend():439] resuming backend
+2025-01-17 14:00:58,886 INFO    MainThread:5001 [jupyter.py:save_ipynb():386] not saving jupyter notebook
+2025-01-17 14:00:58,886 INFO    MainThread:5001 [wandb_init.py:_pause_backend():434] pausing backend
+2025-01-17 14:01:04,768 INFO    MainThread:5001 [wandb_init.py:_resume_backend():439] resuming backend
+2025-01-17 14:01:04,772 INFO    MainThread:5001 [jupyter.py:save_ipynb():386] not saving jupyter notebook
+2025-01-17 14:01:04,772 INFO    MainThread:5001 [wandb_init.py:_pause_backend():434] pausing backend
