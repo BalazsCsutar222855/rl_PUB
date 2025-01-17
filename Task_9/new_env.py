@@ -50,33 +50,47 @@ class CustomEnv(gym.Env):
         # Increment step counter
         self.current_step += 1
 
-        # Define velocities to guide toward the goal
-        velocity_x = np.clip(self.goal[0] - self.observation[0], -1, 1)
-        velocity_y = np.clip(self.goal[1] - self.observation[1], -1, 1)
-        velocity_z = np.clip(self.goal[2] - self.observation[2], -1, 1)
-        drop_command = self.ink  # Assuming ink is independent of the goal
+        # Define directions for action (stay within range -1 to 1 for velocity)
+        # The action space might be: 0 = move left, 1 = move right, etc.
+        if action == 0:
+            velocity_x, velocity_y, velocity_z = -0.1, 0, 0  # Move left
+        elif action == 1:
+            velocity_x, velocity_y, velocity_z = 0.1, 0, 0  # Move right
+        elif action == 2:
+            velocity_x, velocity_y, velocity_z = 0, -0.1, 0  # Move down
+        elif action == 3:
+            velocity_x, velocity_y, velocity_z = 0, 0.1, 0  # Move up
+        elif action == 4:
+            velocity_x, velocity_y, velocity_z = 0, 0, -0.1  # Move backward
+        elif action == 5:
+            velocity_x, velocity_y, velocity_z = 0, 0, 0.1  # Move forward
 
-        actions = [[velocity_x, velocity_y, velocity_z, drop_command],
-                [velocity_x, velocity_y, velocity_z, drop_command]]
+        # Allow for small random variance to encourage exploration
+        velocity_x += random.uniform(-0.05, 0.05)
+        velocity_y += random.uniform(-0.05, 0.05)
+        velocity_z += random.uniform(-0.05, 0.05)
+
+        # Define actions based on velocity and drop command
+        actions = [[velocity_x, velocity_y, velocity_z, self.ink], [velocity_x, velocity_y, velocity_z, self.ink]]
         
-        # Execute the action in the simulation
+        # Execute action in the simulation
         state = self.sim.run(actions)
 
-        # Extract pipette position from simulation state
+        # Extract pipette position from the simulation state
         robot_id = next(iter(state))
         pipette = np.array(state[robot_id]['pipette_position'], dtype=np.float32)
 
-        # Update the observation
+        # Update observation with new position and deltas to goal
         pipette_delta_x = self.goal[0] - pipette[0]
         pipette_delta_y = self.goal[1] - pipette[1]
         pipette_delta_z = self.goal[2] - pipette[2]
 
         self.observation = np.concatenate([pipette, [pipette_delta_x, pipette_delta_y, pipette_delta_z]])
 
-        # Calculate reward and check termination
+        # Calculate reward and check termination condition
         self.reward, terminated = self._calculate_reward(pipette)
 
-        # Check for step limit
+        # Check if maximum steps have been reached
         if self.current_step >= self.max_steps:
             terminated = True
 
@@ -90,6 +104,7 @@ class CustomEnv(gym.Env):
         print(f"  Reward: {self.reward}")
 
         return self.observation, self.reward, terminated, truncated, {}
+
 
 
     def _calculate_reward(self, pipette):
