@@ -15,7 +15,7 @@ class CustomEnv(gym.Env):
         self.sim = Simulation(num_agents=1, render=render)
 
         self.action_space = spaces.Discrete(6)
-        self.observation_space = spaces.Box(low=-1, high=1, shape=(6,), dtype=np.float64)
+        self.observation_space = spaces.Box(low=0, high=1, shape=(6,), dtype=np.float64)
 
         self.goal = [0, 0, 0]
         self.reward = 0
