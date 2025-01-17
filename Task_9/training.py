@@ -47,7 +47,7 @@ for episode in range(1, args.episodes + 1):
     env.reset()
 
     # Total steps per episode = iterations * steps per iteration
-    total_timesteps = args.iterations_per_episode * args.n_steps  # 200,000 iterations * 1,000 steps/iteration
+    total_timesteps = 100000
 
     # Train the model for the calculated number of timesteps
     model.learn(total_timesteps=total_timesteps, reset_num_timesteps=False, tb_log_name=f"PPO_run_{wandb.run.id}_episode_{episode}")
