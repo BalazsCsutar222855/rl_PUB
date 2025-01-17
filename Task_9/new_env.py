@@ -8,7 +8,7 @@ from collections import deque
 class CustomEnv(gym.Env):
     metadata = {'render.modes': ['human']}
 
-    def __init__(self, render=False, max_steps=2048):
+    def __init__(self, render=False, max_steps=1000):
         super(CustomEnv, self).__init__()
         
         self.render = render

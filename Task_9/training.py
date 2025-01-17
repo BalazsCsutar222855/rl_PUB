@@ -11,12 +11,11 @@ from tensorflow.keras.callbacks import TensorBoard
 
 # Initialize command-line argument parser for hyperparameters
 parser = argparse.ArgumentParser()
-parser.add_argument("--learning_rate", type=float, default=0.0003)
-parser.add_argument("--batch_size", type=int, default=64)
+parser.add_argument("--learning_rate", type=float, default=0.0001)
+parser.add_argument("--batch_size", type=int, default=128)
 parser.add_argument("--n_steps", type=int, default=1000)  # 1000 steps per iteration
 parser.add_argument("--n_epochs", type=int, default=10)
-parser.add_argument("--episodes", type=int, default=10)  # Total number of episodes
-parser.add_argument("--iterations_per_episode", type=int, default=2000)  # Iterations per episode
+parser.add_argument("--iterations", type=int, default=20)  # Iterations per episode
 args = parser.parse_args()
 
 # Set WandB API key and initialize the project
@@ -39,21 +38,19 @@ model = SAC('MlpPolicy', env, verbose=1,
             n_epochs=args.n_epochs, 
             tensorboard_log=f"./ppo_custom_env_tensorboard/{wandb.run.id}/")
 
-# Training loop for a specific number of episodes
-for episode in range(1, args.episodes + 1):
-    print(f"Starting episode {episode}/{args.episodes}")
+print(f"Starting episode {episode}/{args.episodes}")
 
-    # Total steps per episode = iterations * steps per iteration
-    total_timesteps = args.iterations_per_episode * args.n_steps  # 200,000 iterations * 1,000 steps/iteration
+# Total steps per episode = iterations * steps per iteration
+total_timesteps = args.iterations * 100000
 
-    # Train the model for the calculated number of timesteps
-    model.learn(total_timesteps=total_timesteps, reset_num_timesteps=False, tb_log_name=f"PPO_run_{wandb.run.id}_episode_{episode}")
+# Train the model for the calculated number of timesteps
+model.learn(total_timesteps=total_timesteps, reset_num_timesteps=False, tb_log_name=f"PPO_run_{wandb.run.id}")
 
-    # Save the model incrementally after each episode
-    model.save(f"ppo_model_episode_{episode}")
+# Save the model incrementally after each episode
+model.save(f"ppo_model_episode")
     
-    # Log the model checkpoint to WandB
-    wandb.save(f"ppo_model_episode_{episode}.zip")
+# Log the model checkpoint to WandB
+wandb.save(f"ppo_model_episode.zip")
 
 # Finish WandB logging after training is complete
 wandb.finish()
