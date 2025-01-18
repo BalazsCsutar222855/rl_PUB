@@ -3,25 +3,20 @@ from gymnasium import spaces
 import numpy as np
 from sim_class import Simulation
 import random
+from collections import deque
 
 class CustomEnv(gym.Env):
     metadata = {'render.modes': ['human']}
 
-    def __init__(self, render=False, action_noise=0.1, velocity_range=1.0):
+    def __init__(self, render=False):
         super(CustomEnv, self).__init__()
         
         # Now the render argument is accepted
         self.render = render
-        self.action_noise = action_noise  # Hyperparameter for randomness in action
-        self.velocity_range = velocity_range  # Hyperparameter for controlling max velocity
-        
         self.sim = Simulation(num_agents=1, render=render)
 
-        # Define action space as discrete or continuous depending on the action
-        # Let's assume 3 actions: move_x, move_y, move_z, drop_ink (each can have a few discrete options)
-        self.action_space = spaces.Discrete(6)  # 6 discrete actions for simplicity, e.g., 3 move directions with 2 possible velocities each
+        self.action_space = spaces.Discrete(6)
 
-        # Observation space (pipette position + deltas to the goal)
         self.observation_space = spaces.Box(low=-1, high=1, shape=(6,), dtype=np.float64)
 
         self.goal = [0, 0, 0]
@@ -52,48 +47,15 @@ class CustomEnv(gym.Env):
         return self.observation, info
 
     def step(self, action):
-        # Action effect based on the action number
-        # Let's assume action corresponds to movement in X, Y, Z directions with drop command
-
-        # Map discrete action to velocity
-        if action == 0:
-            velocity_x = random.uniform(-self.velocity_range, self.velocity_range)
-            velocity_y = 0
-            velocity_z = 0
-        elif action == 1:
-            velocity_x = 0
-            velocity_y = random.uniform(-self.velocity_range, self.velocity_range)
-            velocity_z = 0
-        elif action == 2:
-            velocity_x = 0
-            velocity_y = 0
-            velocity_z = random.uniform(-self.velocity_range, self.velocity_range)
-        elif action == 3:
-            velocity_x = random.uniform(-self.velocity_range, self.velocity_range)
-            velocity_y = random.uniform(-self.velocity_range, self.velocity_range)
-            velocity_z = 0
-        elif action == 4:
-            velocity_x = random.uniform(-self.velocity_range, self.velocity_range)
-            velocity_y = 0
-            velocity_z = random.uniform(-self.velocity_range, self.velocity_range)
-        else:
-            velocity_x = 0
-            velocity_y = random.uniform(-self.velocity_range, self.velocity_range)
-            velocity_z = random.uniform(-self.velocity_range, self.velocity_range)
-
-        # Add small noise to velocity to avoid deterministic behavior (if noise is enabled)
-        if self.action_noise > 0:
-            velocity_x += random.uniform(-self.action_noise, self.action_noise)
-            velocity_y += random.uniform(-self.action_noise, self.action_noise)
-            velocity_z += random.uniform(-self.action_noise, self.action_noise)
-        
-        # Command for ink dropping (use current ink state)
+        # Action
+        velocity_x = random.uniform(-1, 1)
+        velocity_y = random.uniform(-1, 1)
+        velocity_z = random.uniform(-1, 1)
         drop_command = self.ink
 
-        # Pack the action into the same format as previous
-        actions = [[velocity_x, velocity_y, velocity_z, drop_command]]
-
-        # Run the simulation with the given action
+        actions = [[velocity_x, velocity_y, velocity_z, drop_command],
+                   [velocity_x, velocity_y, velocity_z, drop_command]]
+        
         state = self.sim.run(actions)
 
         robot_id = next(iter(state))  
@@ -113,8 +75,16 @@ class CustomEnv(gym.Env):
         # Info (can include diagnostic information if needed)
         self.info = {}
 
+        # Debugging statements
+        print(f"distance_to_goal: {np.linalg.norm(np.array(self.goal) - pipette)}, terminated: {terminated}, truncated: {truncated}")
+
         return self.observation, self.reward, terminated, truncated, self.info
 
+    def render(self, mode='human'):
+
+        if self.render_flag:
+            self.sim.render(mode)
+            
     def _drop_ink(self):
         if self.ink == 1:
             self.ink = 0
