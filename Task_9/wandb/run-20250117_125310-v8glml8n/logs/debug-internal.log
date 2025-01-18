@@ -1,0 +1,16 @@
+{"time":"2025-01-17T12:53:11.09843861+01:00","level":"INFO","msg":"stream: starting","core version":"0.19.2","symlink path":"/home/balage/School/2024-25b-fai2-adsai-BalazsCsutar222855/Deliverables/Task_9/wandb/run-20250117_125310-v8glml8n/logs/debug-core.log"}
+{"time":"2025-01-17T12:53:11.201925526+01:00","level":"INFO","msg":"created new stream","id":"v8glml8n"}
+{"time":"2025-01-17T12:53:11.201952678+01:00","level":"INFO","msg":"stream: started","id":"v8glml8n"}
+{"time":"2025-01-17T12:53:11.201974051+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"v8glml8n"}
+{"time":"2025-01-17T12:53:11.201981563+01:00","level":"INFO","msg":"sender: started","stream_id":"v8glml8n"}
+{"time":"2025-01-17T12:53:11.202221569+01:00","level":"INFO","msg":"handler: started","stream_id":"v8glml8n"}
+{"time":"2025-01-17T12:53:11.467438125+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-01-17T12:53:24.059379351+01:00","level":"INFO","msg":"tensorboard: no root directory after 10 seconds, using working directory"}
+{"time":"2025-01-17T12:53:27.461901745+01:00","level":"INFO","msg":"tensorboard: inferred root directory","rootDir":"/home/balage/School/2024-25b-fai2-adsai-BalazsCsutar222855/Deliverables/Task_9/ppo_cartpole_tensorboard/PPO_4","logDir":"/home/balage/School/2024-25b-fai2-adsai-BalazsCsutar222855/Deliverables/Task_9/ppo_cartpole_tensorboard/PPO_4","namespace":""}
+{"time":"2025-01-17T12:53:36.628678925+01:00","level":"INFO","msg":"Pausing system monitor"}
+{"time":"2025-01-17T12:53:42.813406822+01:00","level":"INFO","msg":"Resuming system monitor"}
+{"time":"2025-01-17T12:53:42.861441473+01:00","level":"INFO","msg":"Pausing system monitor"}
+{"time":"2025-01-17T12:53:42.861491374+01:00","level":"INFO","msg":"Resuming system monitor"}
+{"time":"2025-01-17T12:53:42.861499395+01:00","level":"INFO","msg":"Pausing system monitor"}
+{"time":"2025-01-17T12:53:42.861533173+01:00","level":"INFO","msg":"Resuming system monitor"}
+{"time":"2025-01-17T12:53:42.931768292+01:00","level":"INFO","msg":"Pausing system monitor"}

@@ -1,0 +1,30 @@
+2025-01-18 08:23:12,092 INFO    MainThread:5876 [wandb_setup.py:_flush():68] Current SDK version is 0.19.2
+2025-01-18 08:23:12,092 INFO    MainThread:5876 [wandb_setup.py:_flush():68] Configure stats pid to 5876
+2025-01-18 08:23:12,092 INFO    MainThread:5876 [wandb_setup.py:_flush():68] Loading settings from /home/balage/.config/wandb/settings
+2025-01-18 08:23:12,092 INFO    MainThread:5876 [wandb_setup.py:_flush():68] Loading settings from /home/balage/School/2024-25b-fai2-adsai-BalazsCsutar222855/Deliverables/Task_9/wandb/settings
+2025-01-18 08:23:12,092 INFO    MainThread:5876 [wandb_setup.py:_flush():68] Loading settings from environment variables
+2025-01-18 08:23:12,092 INFO    MainThread:5876 [wandb_init.py:_log_setup():523] Logging user logs to /home/balage/School/2024-25b-fai2-adsai-BalazsCsutar222855/Deliverables/Task_9/wandb/run-20250118_082312-e545gpli/logs/debug.log
+2025-01-18 08:23:12,092 INFO    MainThread:5876 [wandb_init.py:_log_setup():524] Logging internal logs to /home/balage/School/2024-25b-fai2-adsai-BalazsCsutar222855/Deliverables/Task_9/wandb/run-20250118_082312-e545gpli/logs/debug-internal.log
+2025-01-18 08:23:12,092 INFO    MainThread:5876 [wandb_init.py:_jupyter_setup():469] configuring jupyter hooks <wandb.sdk.wandb_init._WandbInit object at 0x7f8a697162d0>
+2025-01-18 08:23:12,092 INFO    MainThread:5876 [wandb_init.py:init():641] calling init triggers
+2025-01-18 08:23:12,093 INFO    MainThread:5876 [wandb_init.py:init():647] wandb.init called with sweep_config: {}
+config: {}
+2025-01-18 08:23:12,093 INFO    MainThread:5876 [wandb_init.py:init():674] starting backend
+2025-01-18 08:23:12,299 INFO    MainThread:5876 [wandb_init.py:init():678] sending inform_init request
+2025-01-18 08:23:12,300 INFO    MainThread:5876 [backend.py:_multiprocessing_setup():104] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2025-01-18 08:23:12,300 INFO    MainThread:5876 [wandb_init.py:init():693] backend started and connected
+2025-01-18 08:23:12,305 INFO    MainThread:5876 [wandb_run.py:_label_probe_notebook():1226] probe notebook
+2025-01-18 08:23:12,307 INFO    MainThread:5876 [wandb_init.py:init():786] updated telemetry
+2025-01-18 08:23:12,312 INFO    MainThread:5876 [wandb_init.py:init():818] communicating run to backend with 90.0 second timeout
+2025-01-18 08:23:12,694 INFO    MainThread:5876 [wandb_init.py:init():868] starting run threads in backend
+2025-01-18 08:23:12,930 INFO    MainThread:5876 [wandb_run.py:_console_start():2415] atexit reg
+2025-01-18 08:23:12,931 INFO    MainThread:5876 [wandb_run.py:_redirect():2265] redirect: wrap_raw
+2025-01-18 08:23:12,931 INFO    MainThread:5876 [wandb_run.py:_redirect():2330] Wrapping output streams.
+2025-01-18 08:23:12,931 INFO    MainThread:5876 [wandb_run.py:_redirect():2355] Redirects installed.
+2025-01-18 08:23:12,933 INFO    MainThread:5876 [wandb_init.py:init():910] run started, returning control to user process
+2025-01-18 08:23:14,086 INFO    MainThread:5876 [wandb_run.py:_tensorboard_callback():1476] tensorboard callback: ./ppo_cartpole_tensorboard/PPO_4, True
+2025-01-18 08:27:10,594 INFO    MainThread:5876 [wandb_run.py:_tensorboard_callback():1476] tensorboard callback: ./ppo_cartpole_tensorboard/PPO_4, True
+2025-01-18 08:32:14,458 INFO    MainThread:5876 [wandb_run.py:_tensorboard_callback():1476] tensorboard callback: ./ppo_cartpole_tensorboard/PPO_4, True
+2025-01-18 08:39:02,494 INFO    MainThread:5876 [wandb_run.py:_tensorboard_callback():1476] tensorboard callback: ./ppo_cartpole_tensorboard/PPO_4, True
+2025-01-18 08:41:28,213 INFO    MainThread:5876 [jupyter.py:save_ipynb():386] not saving jupyter notebook
+2025-01-18 08:41:28,213 INFO    MainThread:5876 [wandb_init.py:_pause_backend():434] pausing backend
