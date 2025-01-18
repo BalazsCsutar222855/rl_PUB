@@ -8,7 +8,7 @@ from collections import deque
 class CustomEnv(gym.Env):
     metadata = {'render.modes': ['human']}
 
-    def __init__(self, render=False):
+    def __init__(self, render=False, max_steps=1000):
         super(CustomEnv, self).__init__()
         
         # Now the render argument is accepted
@@ -39,14 +39,14 @@ class CustomEnv(gym.Env):
         self.previous_action = None
         self.previous_distance_to_goal = None
         self.step_count = 0
-        self.max_steps = 1000  # Maximum steps per episode
+        self.max_steps = max_steps  # Maximum steps per episode
 
     def reset(self, seed=None):
         # Reset the step count
         self.step_count = 0
         
         # Reset other environment states
-        self.goal = [random.randint(0, 1), random.randint(0, 1), random.randint(0, 1)]
+        self.goal = [random.randint(-1, 1), random.randint(-1, 1), random.randint(-1, 1)]
 
         # Reset the simulation state
         state = self.sim.reset(num_agents=1)
@@ -72,9 +72,8 @@ class CustomEnv(gym.Env):
         # Select action from the action list
         velocity_x, velocity_y, velocity_z, drop_command = self.actions[action]
         
-        # Simulate the environment with the selected action
         actions = [[velocity_x, velocity_y, velocity_z, drop_command],
-                   [velocity_x, velocity_y, velocity_z, drop_command]]  # Assuming a single agent
+                   [velocity_x, velocity_y, velocity_z, drop_command]] 
         
         state = self.sim.run(actions)
 
@@ -100,10 +99,6 @@ class CustomEnv(gym.Env):
         self.info = {}
 
         return self.observation, self.reward, terminated, truncated, self.info
-
-    def render(self, mode='human'):
-        if self.render_flag:
-            self.sim.render(mode)
             
     def _drop_ink(self):
         # Ink dropping functionality (if needed)
