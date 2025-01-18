@@ -1,6 +1,7 @@
 import gymnasium as gym
 from gymnasium import spaces
 import numpy as np
+from sim_class import Simulation
 import random
 
 class CustomEnv(gym.Env):

@@ -1,0 +1,15 @@
+{"time":"2025-01-18T09:52:26.507720867+01:00","level":"INFO","msg":"stream: starting","core version":"0.19.2","symlink path":"/home/balage/School/2024-25b-fai2-adsai-BalazsCsutar222855/rl_PUB/wandb/run-20250118_095226-nm5aht9f/logs/debug-core.log"}
+{"time":"2025-01-18T09:52:26.610030016+01:00","level":"INFO","msg":"created new stream","id":"nm5aht9f"}
+{"time":"2025-01-18T09:52:26.610047469+01:00","level":"INFO","msg":"stream: started","id":"nm5aht9f"}
+{"time":"2025-01-18T09:52:26.610088352+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"nm5aht9f"}
+{"time":"2025-01-18T09:52:26.610097488+01:00","level":"INFO","msg":"sender: started","stream_id":"nm5aht9f"}
+{"time":"2025-01-18T09:52:26.610101842+01:00","level":"INFO","msg":"handler: started","stream_id":"nm5aht9f"}
+{"time":"2025-01-18T09:52:26.941405823+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-01-18T09:52:27.163488303+01:00","level":"INFO","msg":"stream: closing","id":"nm5aht9f"}
+{"time":"2025-01-18T09:52:27.163521809+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-01-18T09:52:27.163871404+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-01-18T09:52:28.436653909+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-01-18T09:52:28.632030459+01:00","level":"INFO","msg":"handler: closed","stream_id":"nm5aht9f"}
+{"time":"2025-01-18T09:52:28.632043826+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"nm5aht9f"}
+{"time":"2025-01-18T09:52:28.632056992+01:00","level":"INFO","msg":"sender: closed","stream_id":"nm5aht9f"}
+{"time":"2025-01-18T09:52:28.63209298+01:00","level":"INFO","msg":"stream: closed","id":"nm5aht9f"}
