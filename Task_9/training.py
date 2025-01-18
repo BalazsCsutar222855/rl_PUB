@@ -24,7 +24,7 @@ os.environ['WANDB_API_KEY'] = '8afbb298b3eae0f6035d2e3b3bdcadf08ebb1a41'  # Use 
 wandb.init(project="sb3_custom_env", sync_tensorboard=True)
 
 # Set up the environment
-env = CustomEnv(render=False, max_steps=argparse.n_steps)  # Initialize the custom environment
+env = CustomEnv(render=False, max_steps=args.n_steps)  # Initialize the custom environment
 
 # Initialize ClearML task for remote training setup
 task = Task.init(project_name='Mentor Group M/Group 2', task_name='help')

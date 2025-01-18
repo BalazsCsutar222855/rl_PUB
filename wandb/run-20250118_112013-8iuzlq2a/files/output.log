@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/home/balage/School/2024-25b-fai2-adsai-BalazsCsutar222855/rl_PUB/Task_9/training.py", line 27, in <module>
+    env = CustomEnv(render=False, max_steps=argparse.n_steps)  # Initialize the custom environment
+                                            ^^^^^^^^^^^^^^^^
+AttributeError: module 'argparse' has no attribute 'n_steps'
