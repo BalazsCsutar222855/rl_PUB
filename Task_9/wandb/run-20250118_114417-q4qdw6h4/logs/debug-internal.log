@@ -1,0 +1,13 @@
+{"time":"2025-01-18T11:44:17.599792989+01:00","level":"INFO","msg":"stream: starting","core version":"0.19.2","symlink path":"/home/balage/School/2024-25b-fai2-adsai-BalazsCsutar222855/rl_PUB/Task_9/wandb/run-20250118_114417-q4qdw6h4/logs/debug-core.log"}
+{"time":"2025-01-18T11:44:17.703095671+01:00","level":"INFO","msg":"created new stream","id":"q4qdw6h4"}
+{"time":"2025-01-18T11:44:17.703120041+01:00","level":"INFO","msg":"stream: started","id":"q4qdw6h4"}
+{"time":"2025-01-18T11:44:17.703162293+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"q4qdw6h4"}
+{"time":"2025-01-18T11:44:17.703168153+01:00","level":"INFO","msg":"sender: started","stream_id":"q4qdw6h4"}
+{"time":"2025-01-18T11:44:17.703348413+01:00","level":"INFO","msg":"handler: started","stream_id":"q4qdw6h4"}
+{"time":"2025-01-18T11:44:17.973649568+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-01-18T11:44:29.141045373+01:00","level":"INFO","msg":"tensorboard: no root directory after 10 seconds, using working directory"}
+{"time":"2025-01-18T12:05:36.728653607+01:00","level":"INFO","msg":"Pausing system monitor"}
+{"time":"2025-01-18T12:05:54.653346004+01:00","level":"INFO","msg":"Resuming system monitor"}
+{"time":"2025-01-18T12:05:54.735759505+01:00","level":"INFO","msg":"tensorboard: inferred root directory","rootDir":"/home/balage/School/2024-25b-fai2-adsai-BalazsCsutar222855/rl_PUB/Task_9/ppo_custom_env_tensorboard/q4qdw6h4/PPO_run_q4qdw6h4_episode_1_0","logDir":"/home/balage/School/2024-25b-fai2-adsai-BalazsCsutar222855/rl_PUB/Task_9/ppo_custom_env_tensorboard/q4qdw6h4/PPO_run_q4qdw6h4_episode_1_0","namespace":""}
+{"time":"2025-01-18T12:08:17.903859187+01:00","level":"INFO","msg":"Pausing system monitor"}
+{"time":"2025-01-18T12:08:24.844521563+01:00","level":"INFO","msg":"Resuming system monitor"}

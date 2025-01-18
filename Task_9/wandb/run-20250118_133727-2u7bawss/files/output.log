@@ -1,0 +1,6 @@
+[34m[1mwandb[0m: [33mWARNING[0m Calling wandb.login() after wandb.init() has no effect.
+Using cuda device
+Wrapping the env with a `Monitor` wrapper
+Wrapping the env in a DummyVecEnv.
+Starting episode 1/5
+Logging to ./sac_custom_env_tensorboard/2u7bawss/SAC_run_2u7bawss_episode_1_0
