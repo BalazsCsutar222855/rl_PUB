@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/home/balage/School/2024-25b-fai2-adsai-BalazsCsutar222855/rl_PUB/Task_9/training.py", line 27, in <module>
+    env = CustomEnv(render=False, max_steps=args.n_steps)  # Initialize the custom environment
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/balage/School/2024-25b-fai2-adsai-BalazsCsutar222855/rl_PUB/Task_9/env_V3_final_2.py", line 17, in __init__
+    self.sim = Simulation(num_agents=1, render=render)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/balage/School/2024-25b-fai2-adsai-BalazsCsutar222855/rl_PUB/Task_9/sim_class.py", line 27, in __init__
+    texture_list = os.listdir("textures")
+                   ^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'textures'
