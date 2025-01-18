@@ -1,0 +1,7 @@
+{"time":"2025-01-18T11:25:26.84072894+01:00","level":"INFO","msg":"stream: starting","core version":"0.19.2","symlink path":"/home/balage/School/2024-25b-fai2-adsai-BalazsCsutar222855/rl_PUB/Task_9/wandb/run-20250118_112526-smvu86jr/logs/debug-core.log"}
+{"time":"2025-01-18T11:25:26.943907587+01:00","level":"INFO","msg":"created new stream","id":"smvu86jr"}
+{"time":"2025-01-18T11:25:26.943930371+01:00","level":"INFO","msg":"stream: started","id":"smvu86jr"}
+{"time":"2025-01-18T11:25:26.943972333+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"smvu86jr"}
+{"time":"2025-01-18T11:25:26.943976266+01:00","level":"INFO","msg":"handler: started","stream_id":"smvu86jr"}
+{"time":"2025-01-18T11:25:26.943989417+01:00","level":"INFO","msg":"sender: started","stream_id":"smvu86jr"}
+{"time":"2025-01-18T11:25:27.178996056+01:00","level":"INFO","msg":"Starting system monitor"}

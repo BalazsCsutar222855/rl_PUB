@@ -11,7 +11,6 @@ class CustomEnv(gym.Env):
     def __init__(self, render=False, max_steps=1000):
         super(CustomEnv, self).__init__()
 
-        self.render = render
         self.max_steps = max_steps
         
         self.sim = Simulation(num_agents=1, render=render)
@@ -73,9 +72,6 @@ class CustomEnv(gym.Env):
 
         return observation, reward, done, truncated, info
     
-    def render(self, mode='human'):
-        pass
-
     def reset(self, seed=None):
         if seed is not None:
             np.random.seed(seed)
