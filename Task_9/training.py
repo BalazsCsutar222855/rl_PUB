@@ -10,6 +10,8 @@ import typing_extensions
 import tensorboard
 from datetime import datetime
 
+wandb.login(key='8afbb298b3eae0f6035d2e3b3bdcadf08ebb1a41')
+
 # Initialize command-line argument parser for hyperparameters
 parser = argparse.ArgumentParser()
 parser.add_argument("--learning_rate", type=float, default=0.0003)
