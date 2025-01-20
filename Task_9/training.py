@@ -16,7 +16,6 @@ parser.add_argument("--batch_size", type=int, default=32)  # Updated batch size
 parser.add_argument("--max_steps", type=int, default=1000)  # Updated n_steps
 parser.add_argument("--n_steps", type=int, default=2048)  # Updated n_steps
 parser.add_argument("--n_epochs", type=int, default=10)  # n_epochs remains the same
-parser.add_argument("--episodes", type=int, default=10)  # Total number of episodes
 parser.add_argument("--iterations_per_episode", type=int, default=20000)  # Iterations per episode
 parser.add_argument("--gamma", type=float, default=0.98)  # Updated gamma
 parser.add_argument("--ent_coef", type=float, default=0.02)  # Entropy coefficient for exploration
@@ -53,7 +52,7 @@ model = PPO(
     ent_coef=args.ent_coef,  # Use entropy coefficient from command-line args
     clip_range=args.clip_range,  # Added clip range for PPO
     vf_coef=args.vf_coef,  # Added value function coefficient for PPO
-    tensorboard_log=f"./runs/{wandb.run.id}/tensorboard/"
+    tensorboard_log=f"./runs/{wandb.wandb_session.id}/tensorboard/"
 )
 
 # Callback for wandb
