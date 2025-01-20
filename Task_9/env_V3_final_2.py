@@ -17,28 +17,49 @@ class CustomEnv(gym.Env):
         self.observation_space = spaces.Box(low=-np.inf, high=np.inf, shape=(6,), dtype=np.float32)
         
         self.current_step = 0
+        self.previous_distance = np.inf  # Track the previous distance to the goal for progress reward
 
     def reset(self, seed=None):
         if seed is not None:
             np.random.seed(seed)
 
-        # Randomize goal position as done in good code
+        # Randomize goal position
         self.goal_position = np.array([
             np.random.uniform(-0.18700, 0.25300),
             np.random.uniform(-0.17050, 0.21950),
             np.random.uniform(0.16940, 0.28950)
         ], dtype=np.float32)
 
-        # Reset the simulation and get initial robot position
+        # Reset the simulation and get the initial robot position
         observation = self.simulation.reset(num_agents=1)
         robot_position = self.simulation.get_pipette_position(self.simulation.robotIds[0])
 
         # Combine robot position and goal position
         observation = np.concatenate((robot_position, self.goal_position), axis=0).astype(np.float32)
         self.current_step = 0
+        self.previous_distance = np.linalg.norm(robot_position - self.goal_position)  # Track the initial distance
         
         info = {}
         return observation, info
+
+    def compute_reward(self, robot_position):
+        """Compute the reward based on the robot's distance to the goal and progress."""
+        distance_to_goal = np.linalg.norm(robot_position - self.goal_position)
+        
+        # Reward for getting closer to the goal
+        reward = -distance_to_goal  # Negative distance for minimization problem
+        
+        # Bonus for progress (getting closer to the goal)
+        if distance_to_goal < self.previous_distance:
+            reward += 1  # Reward the agent for making progress towards the goal
+        
+        # Task completion (goal reached)
+        if distance_to_goal <= 0.001:  # Goal threshold
+            reward += 100  # Large positive reward for completing the task
+        
+        self.previous_distance = distance_to_goal  # Update previous distance for next step
+        
+        return reward
 
     def step(self, action):
         self.current_step += 1
@@ -49,13 +70,11 @@ class CustomEnv(gym.Env):
         robot_position = self.simulation.get_pipette_position(self.simulation.robotIds[0])
         observation = np.concatenate((robot_position, self.goal_position), axis=0).astype(np.float32)
         
-        # Calculate reward as in good code
-        distance_to_goal = np.linalg.norm(robot_position - self.goal_position)
-        reward = -distance_to_goal  # Negative distance for minimization problem
-        if distance_to_goal <= 0.001:  # Task completion reward
-            reward = 100  # Positive reward for reaching the goal
+        # Compute the reward
+        reward = self.compute_reward(robot_position)
 
-        terminated = distance_to_goal <= 0.001
+        # Check if the goal is reached
+        terminated = np.linalg.norm(robot_position - self.goal_position) <= 0.001
         truncated = self.current_step >= self.max_steps
         
         info = {}
