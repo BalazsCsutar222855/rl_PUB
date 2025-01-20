@@ -2,7 +2,7 @@ import wandb
 import os
 import argparse
 from stable_baselines3 import PPO
-from stable_baselines3.common.callbacks import BaseCallback
+from wandb.integration.sb3 import WandbCallback
 from clearml import Task
 from env_V3_final_2 import CustomEnv  # Assuming CustomEnv is in this file
 import tensorboard
@@ -62,7 +62,7 @@ for episode in range(1, args.episodes + 1):
         total_timesteps=total_timesteps,
         reset_num_timesteps=False,
         tb_log_name=f"PPO_run_{wandb.run.id}_episode_{episode}",
-        callback=BaseCallback(
+        callback=WandbCallback(
             model_save_freq=10000,
             model_save_path=save_path,
             verbose=2
