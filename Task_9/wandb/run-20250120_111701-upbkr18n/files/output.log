@@ -1,0 +1,35 @@
+ClearML Task: created new task id=5a382b3d3c8e4d98b0d8ace29e5246f3
+ClearML results page: http://194.171.191.226:8080/projects/9ca9f3ecc32541f6b8903dceb8c3f4aa/experiments/5a382b3d3c8e4d98b0d8ace29e5246f3/output/log
+CLEARML-SERVER new package available: UPGRADE to v2.0.0 is recommended!
+Release Notes:
+### Breaking Changes
+
+MongoDB major version was upgraded from v5.x to 6.x.
+Please note that if your current ClearML Server version is smaller than v1.17 (where MongoDB v5.x was first used), you'll need to first upgrade to ClearML Server v1.17.
+#### Upgrading to ClearML Server v1.17 from a previous version
+- If using docker-compose,  use the following docker-compose files:
+  * [docker-compose file](https://github.com/allegroai/clearml-server/blob/2976ce69cc91550a3614996e8a8d8cd799af2efd/upgrade/1_17_to_2_0/docker-compose.yml)
+  * [docker-compose file foe Windows](https://github.com/allegroai/clearml-server/blob/2976ce69cc91550a3614996e8a8d8cd799af2efd/upgrade/1_17_to_2_0/docker-compose-win10.yml)
+
+### New Features
+
+- New look and feel: Full light/dark themes ([clearml #1297](https://github.com/allegroai/clearml/issues/1297))
+- New UI task creation options
+  - Support bash as well as python scripts
+  - Support file upload
+- New UI setting for configuring cloud storage credentials with which ClearML can clean up cloud storage artifacts on task deletion.
+- Add UI scalar plots presentation of plots in sections grouped by metrics.
+- Add UI Batch export plot embed codes for all metric plots in a single click.
+- Add UI pipeline presentation of steps grouped into stages
+
+### Bug Fixes
+- Fix UI Model Endpoint's Number of Requests plot sometimes displays incorrect data
+- Fix UI datasets page does not filter according to project when dataset is running
+- Fix UI task scalar legend does not change colors when smoothing is enabled
+- Fix queue list in UI Workers and Queues page does not alphabetically sort by queue display name
+- Fix queue display name is not searchable in UI Task Creation modal's queue field
+
+2025-01-20 11:17:04,193 - clearml.Task - INFO - Waiting for repository detection and full package requirement analysis
+2025-01-20 11:17:05,744 - clearml.Task - INFO - Finished repository detection and package analysis
+Switching to remote execution, output log page http://194.171.191.226:8080/projects/9ca9f3ecc32541f6b8903dceb8c3f4aa/experiments/5a382b3d3c8e4d98b0d8ace29e5246f3/output/log
+ClearML Terminating local execution process - continuing execution remotely

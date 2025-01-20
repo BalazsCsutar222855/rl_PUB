@@ -21,6 +21,8 @@ parser.add_argument("--gamma", type=float, default=0.98)  # Discount factor
 parser.add_argument("--ent_coef", type=float, default=0.02)  # Entropy coefficient for exploration
 args = parser.parse_args()
 
+os.environ["WANDB_API_KEY"] = "8afbb298b3eae0f6035d2e3b3bdcadf08ebb1a41" 
+
 # Set WandB API key and initialize the project
 wandb.login()  # This will prompt for a login if needed, using the credentials stored
 wandb.init(project="sb3_custom_env", sync_tensorboard=True)

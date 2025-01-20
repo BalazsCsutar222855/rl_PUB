@@ -1,0 +1,31 @@
+{
+  "os": "Linux-6.1.0-28-amd64-x86_64-with-glibc2.36",
+  "python": "CPython 3.12.8",
+  "startedAt": "2025-01-20T10:17:02.091036Z",
+  "program": "/home/balage/School/2024-25b-fai2-adsai-BalazsCsutar222855/rl_PUB/Task_9/training.py",
+  "codePath": "Task_9/training.py",
+  "git": {
+    "remote": "https://github.com/BalazsCsutar222855/rl_PUB.git",
+    "commit": "8f6280036eff69b22b20b1ead370c69013391329"
+  },
+  "email": "222855@buas.nl",
+  "root": "/home/balage/School/2024-25b-fai2-adsai-BalazsCsutar222855/rl_PUB/Task_9",
+  "host": "thinkpad",
+  "executable": "/home/balage/miniconda3/bin/python",
+  "codePathLocal": "training.py",
+  "cpu_count": 2,
+  "cpu_count_logical": 4,
+  "disk": {
+    "/": {
+      "total": "249365385216",
+      "used": "201972748288"
+    }
+  },
+  "memory": {
+    "total": "16500944896"
+  },
+  "cpu": {
+    "count": 2,
+    "countLogical": 4
+  }
+}
