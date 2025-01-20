@@ -18,6 +18,7 @@ class CustomEnv(gym.Env):
         
         self.current_step = 0
         self.previous_distance = np.inf  # Track the previous distance to the goal for progress reward
+        self.initial_dist = np.inf  # Initialize the initial distance to the goal
 
     def reset(self, seed=None):
         if seed is not None:
@@ -38,6 +39,7 @@ class CustomEnv(gym.Env):
         observation = np.concatenate((robot_position, self.goal_position), axis=0).astype(np.float32)
         self.current_step = 0
         self.previous_distance = np.linalg.norm(robot_position - self.goal_position)  # Track the initial distance
+        self.initial_dist = self.previous_distance  # Set the initial distance for later calculations
         
         info = {}
         return observation, info
@@ -55,11 +57,6 @@ class CustomEnv(gym.Env):
 
         # Determine how far the pipette is from the goal
         dist_to_goal = np.linalg.norm(current_position - self.goal_position)
-
-        # If this is the first step, store the initial distance and previous distance
-        if self.previous_distance is np.inf:
-            self.previous_distance = dist_to_goal
-            self.initial_dist = dist_to_goal
 
         # Calculate how much closer we got to the goal
         step_progress = self.previous_distance - dist_to_goal
