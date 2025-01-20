@@ -51,23 +51,23 @@ class CustomEnv(gym.Env):
         robot_position = np.array(robot_position)
         distance_to_goal = np.linalg.norm(robot_position - self.goal_position)
 
-        # Progressive reward for getting closer to the goal
-        progress_reward = (self.previous_distance - distance_to_goal) * 100
+        # Progressive reward for getting closer to the goal (larger scale)
+        progress_reward = (self.previous_distance - distance_to_goal) * 200  # Increased scaling
 
         # Directional reward (dot product to encourage movement toward goal)
         movement_vector = robot_position - self.previous_position
         goal_vector = self.goal_position - self.previous_position
         direction_reward = np.dot(movement_vector, goal_vector) / (np.linalg.norm(goal_vector) + 1e-6)
-        direction_reward *= 50  
+        direction_reward *= 100  # Increased weight to directional reward
 
-        # Efficiency penalty (reduce unnecessary movement)
-        efficiency_penalty = -np.linalg.norm(movement_vector) * 0.1  
+        # Efficiency penalty (optional, decrease if agent takes longer)
+        efficiency_penalty = -np.linalg.norm(movement_vector) * 0.05  # Reduced penalty
 
-        # Task completion reward
-        completion_reward = 100 if distance_to_goal <= 0.001 else 0
+        # Task completion reward (increased for faster task completion)
+        completion_reward = 200 if distance_to_goal <= 0.001 else 0  # Increased completion reward
 
         # Small time penalty to encourage faster task completion
-        time_penalty = -0.01  
+        time_penalty = -0.02  # Slightly increased penalty for time to speed up learning
 
         # Total reward
         reward = progress_reward + direction_reward + efficiency_penalty + completion_reward + time_penalty
