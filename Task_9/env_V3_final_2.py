@@ -64,7 +64,7 @@ class CustomEnv(gym.Env):
         # Call the environment step function
         observation = self.simulation.run([action]) # Why do we need to pass the action as a list? Think about the simulation class.
         # now we need to process the observation and extract the relevant information, the pipette position, convert it to a numpy array, and append the goal position and make sure the array is of type np.float32
-        pipette_position = np.array(observation[f'robotId_{self.sim.robotIds[0]}']['pipette_position'], dtype=np.float32)
+        pipette_position = np.array(observation[f'robotId_{self.simulation.robotIds[0]}']['pipette_position'], dtype=np.float32)
 
 
 
