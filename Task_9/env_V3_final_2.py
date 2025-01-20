@@ -6,67 +6,70 @@ from sim_class import Simulation
 class CustomEnv(gym.Env):
     def __init__(self, render=False, max_steps=5000000):
         super(CustomEnv, self).__init__()
-        self.render = render
+        self.render_enabled = render
         self.max_steps = max_steps
 
         # Create the simulation environment
-        self.sim = Simulation(num_agents=1, render=self.render)
+        self.simulation = Simulation(num_agents=1, render=self.render_enabled)
 
         # Define goal position ranges
-        self.x_min, self.x_max = -0.187, 0.2531
-        self.y_min, self.y_max = -0.1705, 0.2195
-        self.z_min, self.z_max = 0.1195, 0.2895
+        self.goal_x_min, self.goal_x_max = -0.187, 0.2531
+        self.goal_y_min, self.goal_y_max = -0.1705, 0.2195
+        self.goal_z_min, self.goal_z_max = 0.1195, 0.2895
 
         # Define action and observation spaces
-        self.action_space = spaces.Box(low=-1.0, high=1.0, shape=(3,), dtype=np.float32)
+        # Change action space to 4-dimensional as in the good code
+        self.action_space = spaces.Box(low=-1.0, high=1.0, shape=(4,), dtype=np.float32)
+
         self.observation_space = spaces.Box(
-            low=np.array([self.x_min, self.y_min, self.z_min, -self.x_max, -self.y_max, -self.z_max], dtype=np.float32),
-            high=np.array([self.x_max, self.y_max, self.z_max, self.x_max, self.y_max, self.z_max], dtype=np.float32),
+            low=np.array([self.goal_x_min, self.goal_y_min, self.goal_z_min, -self.goal_x_max, -self.goal_y_max, -self.goal_z_max], dtype=np.float32),
+            high=np.array([self.goal_x_max, self.goal_y_max, self.goal_z_max, self.goal_x_max, self.goal_y_max, self.goal_z_max], dtype=np.float32),
             dtype=np.float32
         )
         
-        self.steps = 0
+        self.current_step = 0
 
     def reset(self, seed=None):
         if seed is not None:
             np.random.seed(seed)
 
-        # Randomize goal position
-        x = np.random.uniform(self.x_min, self.x_max)
-        y = np.random.uniform(self.y_min, self.y_max)
-        z = np.random.uniform(self.z_min, self.z_max)
-        self.goal_pos = np.array([x, y, z], dtype=np.float32)
+        # Randomize goal position as done in good code
+        goal_x = np.random.uniform(self.goal_x_min, self.goal_x_max)
+        goal_y = np.random.uniform(self.goal_y_min, self.goal_y_max)
+        goal_z = np.random.uniform(self.goal_z_min, self.goal_z_max)
+        self.goal_position = np.array([goal_x, goal_y, goal_z], dtype=np.float32)
 
-        # Reset the simulation and get initial pipette position
-        observation = self.sim.reset(num_agents=1)
-        pipette_pos = self.sim.get_pipette_position(self.sim.robotIds[0])
+        # Reset the simulation and get initial robot position
+        observation = self.simulation.reset(num_agents=1)
+        robot_position = self.simulation.get_pipette_position(self.simulation.robotIds[0])
 
-        # Combine pipette position and goal position
-        observation = np.concatenate((pipette_pos, self.goal_pos), axis=0).astype(np.float32)
-        self.steps = 0
+        # Combine robot position and goal position
+        observation = np.concatenate((robot_position, self.goal_position), axis=0).astype(np.float32)
+        self.current_step = 0
         
         info = {}
         return observation, info
 
     def step(self, action):
-        self.steps += 1
-        action = np.append(np.array(action, dtype=np.float32), 0)
+        self.current_step += 1
+        action = np.append(np.array(action, dtype=np.float32), 0)  # Add drop action to match good code format
 
         # Run simulation step
-        observation = self.sim.run([action])
-        pipette_pos = self.sim.get_pipette_position(self.sim.robotIds[0])
-        observation = np.concatenate((pipette_pos, self.goal_pos), axis=0).astype(np.float32)
+        observation = self.simulation.run([action])
+        robot_position = self.simulation.get_pipette_position(self.simulation.robotIds[0])
+        observation = np.concatenate((robot_position, self.goal_position), axis=0).astype(np.float32)
         
-        # Calculate reward
-        distance = np.linalg.norm(pipette_pos - self.goal_pos)
-        reward = -distance
-        reward -= 0.01 * self.steps
+        # Calculate reward as in good code
+        distance_to_goal = np.linalg.norm(robot_position - self.goal_position)
+        reward = -distance_to_goal  # Negative distance for minimization problem
+        if distance_to_goal <= 0.001:  # Task completion reward
+            reward += 100  # Positive reward for reaching the goal
 
-        terminated = distance <= 0.001
+        terminated = distance_to_goal <= 0.001
         if terminated:
-            reward += 10
+            reward += 10  # Additional reward for completion
 
-        truncated = self.steps >= self.max_steps
+        truncated = self.current_step >= self.max_steps
         
         info = {}
         return observation, reward, terminated, truncated, info
@@ -75,4 +78,4 @@ class CustomEnv(gym.Env):
         pass
 
     def close(self):
-        self.sim.close()
+        self.simulation.close()
