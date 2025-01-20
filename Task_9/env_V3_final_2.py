@@ -80,7 +80,7 @@ class CustomEnv(gym.Env):
             terminated = False
         
         # next we need to check if the episode should be truncated, we can check if the current number of steps is greater than the maximum number of steps
-        if self.steps >= self.max_steps:
+        if self.current_step >= self.max_steps:
             truncated = True
         else:
             truncated = False
