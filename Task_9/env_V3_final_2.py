@@ -43,19 +43,32 @@ class CustomEnv(gym.Env):
         return observation, info
 
     def compute_reward(self, robot_position):
-        """Compute the reward based on the robot's distance to the goal and progress."""
         distance_to_goal = np.linalg.norm(robot_position - self.goal_position)
         
-        # Reward for getting closer to the goal
-        reward = -distance_to_goal  # Negative distance for minimization problem
+        # Reward for progress (difference in distance)
+        progress_reward = self.previous_distance - distance_to_goal
         
-        # Task completion (goal reached)
+        # Small reward for getting closer, larger penalty for moving away
+        if progress_reward > 0:
+            progress_reward *= 10  # Amplify positive progress
+        else:
+            progress_reward *= 2   # Penalize moving away
+
+        # Completion reward
         if distance_to_goal <= 0.001:  # Goal threshold
-            reward += 100  # Large positive reward for completing the task
+            completion_reward = 100  # Large reward for completion
+        else:
+            completion_reward = 0
+
+        # Time penalty to encourage efficiency
+        time_penalty = -0.01
+
+        reward = progress_reward + completion_reward + time_penalty
         
         self.previous_distance = distance_to_goal  # Update previous distance for next step
         
         return reward
+
 
     def step(self, action):
         self.current_step += 1
