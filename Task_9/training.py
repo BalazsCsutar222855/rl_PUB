@@ -13,6 +13,7 @@ import typing_extensions
 parser = argparse.ArgumentParser()
 parser.add_argument("--learning_rate", type=float, default=0.0001)  # Updated learning rate
 parser.add_argument("--batch_size", type=int, default=32)  # Updated batch size
+parser.add_argument("--max_steps", type=int, default=1000)  # Updated n_steps
 parser.add_argument("--n_steps", type=int, default=2048)  # Updated n_steps
 parser.add_argument("--n_epochs", type=int, default=10)  # n_epochs remains the same
 parser.add_argument("--episodes", type=int, default=10)  # Total number of episodes
@@ -31,7 +32,7 @@ wandb.login()  # This will prompt for a login if needed, using the credentials s
 wandb.init(project="sb3_custom_env", sync_tensorboard=True)
 
 # Set up the environment
-env = CustomEnv(render=False, max_steps=args.n_steps)  # Initialize the custom environment
+env = CustomEnv(render=False, max_steps=args.max_steps)  # Initialize the custom environment
 
 # Initialize ClearML task for remote training setup
 task = Task.init(project_name='Mentor Group M/Group 2', task_name='help')
