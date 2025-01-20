@@ -1,7 +1,0 @@
-{"time":"2025-01-18T14:03:26.739351452+01:00","level":"INFO","msg":"stream: starting","core version":"0.19.2","symlink path":"/home/balage/School/2024-25b-fai2-adsai-BalazsCsutar222855/rl_PUB/Task_9/wandb/run-20250118_140326-elym3gtf/logs/debug-core.log"}
-{"time":"2025-01-18T14:03:26.842479947+01:00","level":"INFO","msg":"created new stream","id":"elym3gtf"}
-{"time":"2025-01-18T14:03:26.842517363+01:00","level":"INFO","msg":"stream: started","id":"elym3gtf"}
-{"time":"2025-01-18T14:03:26.842997222+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"elym3gtf"}
-{"time":"2025-01-18T14:03:26.843184452+01:00","level":"INFO","msg":"handler: started","stream_id":"elym3gtf"}
-{"time":"2025-01-18T14:03:26.843205575+01:00","level":"INFO","msg":"sender: started","stream_id":"elym3gtf"}
-{"time":"2025-01-18T14:03:27.120309757+01:00","level":"INFO","msg":"Starting system monitor"}

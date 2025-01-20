@@ -1,6 +1,0 @@
-2025-01-18 12:08:24,852 INFO    MainThread:146649 [wandb_init.py:_log_setup():523] Logging user logs to /home/balage/School/2024-25b-fai2-adsai-BalazsCsutar222855/rl_PUB/Task_9/wandb/run-20250118_120824-wxtzjqq9/logs/debug.log
-2025-01-18 12:08:24,852 INFO    MainThread:146649 [wandb_init.py:_log_setup():524] Logging internal logs to /home/balage/School/2024-25b-fai2-adsai-BalazsCsutar222855/rl_PUB/Task_9/wandb/run-20250118_120824-wxtzjqq9/logs/debug-internal.log
-2025-01-18 12:08:24,853 INFO    MainThread:146649 [wandb_init.py:init():641] calling init triggers
-2025-01-18 12:08:24,853 INFO    MainThread:146649 [wandb_init.py:init():647] wandb.init called with sweep_config: {}
-config: {}
-2025-01-18 12:08:24,853 INFO    MainThread:146649 [wandb_init.py:init():669] wandb.init() called when a run is still active
