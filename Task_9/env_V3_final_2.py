@@ -57,7 +57,6 @@ class CustomEnv(gym.Env):
         if distance_to_goal <= 0.001:
             reward += 100
         
-        self.previous_position = robot_position  # Update position for next step
         self.previous_distance = distance_to_goal  # Update previous distance for next step
         
         return reward
