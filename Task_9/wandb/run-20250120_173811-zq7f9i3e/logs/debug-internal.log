@@ -1,0 +1,7 @@
+{"time":"2025-01-20T17:38:12.079175042+01:00","level":"INFO","msg":"stream: starting","core version":"0.19.2","symlink path":"/home/balage/School/2024-25b-fai2-adsai-BalazsCsutar222855/rl_PUB/Task_9/wandb/run-20250120_173811-zq7f9i3e/logs/debug-core.log"}
+{"time":"2025-01-20T17:38:12.181920297+01:00","level":"INFO","msg":"created new stream","id":"zq7f9i3e"}
+{"time":"2025-01-20T17:38:12.181944462+01:00","level":"INFO","msg":"stream: started","id":"zq7f9i3e"}
+{"time":"2025-01-20T17:38:12.181960215+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"zq7f9i3e"}
+{"time":"2025-01-20T17:38:12.181998562+01:00","level":"INFO","msg":"sender: started","stream_id":"zq7f9i3e"}
+{"time":"2025-01-20T17:38:12.182328887+01:00","level":"INFO","msg":"handler: started","stream_id":"zq7f9i3e"}
+{"time":"2025-01-20T17:38:12.410508116+01:00","level":"INFO","msg":"Starting system monitor"}
