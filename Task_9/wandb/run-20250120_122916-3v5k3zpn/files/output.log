@@ -1,0 +1,75 @@
+Traceback (most recent call last):
+  File "/home/balage/School/2024-25b-fai2-adsai-BalazsCsutar222855/rl_PUB/Task_9/training.py", line 38, in <module>
+    task = Task.init(project_name='Mentor Group M/Group 2', task_name='help')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/balage/miniconda3/lib/python3.12/site-packages/clearml/task.py", line 604, in init
+    task = cls._create_dev_task(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/balage/miniconda3/lib/python3.12/site-packages/clearml/task.py", line 4117, in _create_dev_task
+    task = cls(
+           ^^^^
+  File "/home/balage/miniconda3/lib/python3.12/site-packages/clearml/task.py", line 217, in __init__
+    super(Task, self).__init__(**kwargs)
+  File "/home/balage/miniconda3/lib/python3.12/site-packages/clearml/backend_interface/task/task.py", line 194, in __init__
+    if self.data is None:
+       ^^^^^^^^^
+  File "/home/balage/miniconda3/lib/python3.12/site-packages/clearml/backend_interface/base.py", line 168, in data
+    self.reload()
+  File "/home/balage/miniconda3/lib/python3.12/site-packages/clearml/backend_interface/task/task.py", line 552, in reload
+    return super(Task, self).reload()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/balage/miniconda3/lib/python3.12/site-packages/clearml/backend_interface/base.py", line 180, in reload
+    self._data = self._reload()
+                 ^^^^^^^^^^^^^^
+  File "/home/balage/miniconda3/lib/python3.12/site-packages/clearml/backend_interface/task/task.py", line 648, in _reload
+    res = self.send(tasks.GetByIdRequest(task=self.id))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/balage/miniconda3/lib/python3.12/site-packages/clearml/backend_interface/base.py", line 113, in send
+    return self._send(session=self.session, req=req, ignore_errors=ignore_errors, raise_on_errors=raise_on_errors,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/balage/miniconda3/lib/python3.12/site-packages/clearml/backend_interface/base.py", line 62, in _send
+    res = session.send(req, async_enable=async_enable)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/balage/miniconda3/lib/python3.12/site-packages/clearml/backend_api/session/session.py", line 656, in send
+    res = self.send_request(
+          ^^^^^^^^^^^^^^^^^^
+  File "/home/balage/miniconda3/lib/python3.12/site-packages/clearml/backend_api/session/session.py", line 508, in send_request
+    return self._send_request(
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/balage/miniconda3/lib/python3.12/site-packages/clearml/backend_api/session/session.py", line 423, in _send_request
+    res = self.__http_session.request(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/balage/miniconda3/lib/python3.12/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/balage/miniconda3/lib/python3.12/site-packages/clearml/backend_api/utils.py", line 98, in send
+    return super(SessionWithTimeout, self).send(request, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/balage/miniconda3/lib/python3.12/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/balage/miniconda3/lib/python3.12/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "/home/balage/miniconda3/lib/python3.12/site-packages/urllib3/connectionpool.py", line 789, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/balage/miniconda3/lib/python3.12/site-packages/urllib3/connectionpool.py", line 495, in _make_request
+    conn.request(
+  File "/home/balage/miniconda3/lib/python3.12/site-packages/urllib3/connection.py", line 441, in request
+    self.endheaders()
+  File "/home/balage/miniconda3/lib/python3.12/http/client.py", line 1331, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/home/balage/miniconda3/lib/python3.12/http/client.py", line 1091, in _send_output
+    self.send(msg)
+  File "/home/balage/miniconda3/lib/python3.12/http/client.py", line 1035, in send
+    self.connect()
+  File "/home/balage/miniconda3/lib/python3.12/site-packages/urllib3/connection.py", line 279, in connect
+    self.sock = self._new_conn()
+                ^^^^^^^^^^^^^^^^
+  File "/home/balage/miniconda3/lib/python3.12/site-packages/urllib3/connection.py", line 199, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/balage/miniconda3/lib/python3.12/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+KeyboardInterrupt
