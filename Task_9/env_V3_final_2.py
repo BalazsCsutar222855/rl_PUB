@@ -59,21 +59,34 @@ class CustomEnv(gym.Env):
 
     def step(self, action):
         self.current_step += 1
-        action = np.append(np.array(action, dtype=np.float32), 0)  # Add drop action to match good code format
+        action = np.append(np.array(action, dtype=np.float32), 0)
 
-        # Run simulation step
-        observation = self.simulation.run([action])
-        robot_position = self.simulation.get_pipette_position(self.simulation.robotIds[0])
-        observation = np.concatenate((robot_position, self.goal_position), axis=0).astype(np.float32)
-        
-        # Compute the reward
-        reward = self.compute_reward(robot_position)
+        # Call the environment step function
+        observation = self.sim.run([action]) # Why do we need to pass the action as a list? Think about the simulation class.
+        # now we need to process the observation and extract the relevant information, the pipette position, convert it to a numpy array, and append the goal position and make sure the array is of type np.float32
+        pipette_position = np.array(observation[f'robotId_{self.sim.robotIds[0]}']['pipette_position'], dtype=np.float32)
 
-        # Check if the goal is reached
-        terminated = np.linalg.norm(robot_position - self.goal_position) <= 0.001
-        truncated = self.current_step >= self.max_steps
+
+
+        observation = np.concatenate([pipette_position, self.goal_position], axis=0)
+        reward = float(-np.linalg.norm(pipette_position - self.goal_position))
         
-        info = {}
+        distance = np.linalg.norm(pipette_position - self.goal_position)
+        if distance < 0.001:
+            terminated = True
+            # we can also give the agent a positive reward for completing the task
+            reward = float(100)
+        else:
+            terminated = False
+        
+        # next we need to check if the episode should be truncated, we can check if the current number of steps is greater than the maximum number of steps
+        if self.steps >= self.max_steps:
+            truncated = True
+        else:
+            truncated = False
+
+        info = {} # we don't need to return any additional information
+
         return observation, reward, terminated, truncated, info
 
     def render(self, mode='human'):
