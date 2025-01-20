@@ -49,10 +49,6 @@ class CustomEnv(gym.Env):
         # Reward for getting closer to the goal
         reward = -distance_to_goal  # Negative distance for minimization problem
         
-        # Bonus for progress (getting closer to the goal)
-        if distance_to_goal < self.previous_distance:
-            reward += 1  # Reward the agent for making progress towards the goal
-        
         # Task completion (goal reached)
         if distance_to_goal <= 0.001:  # Goal threshold
             reward += 100  # Large positive reward for completing the task
