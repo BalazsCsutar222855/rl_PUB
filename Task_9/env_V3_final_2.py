@@ -18,6 +18,8 @@ class CustomEnv(gym.Env):
         
         self.current_step = 0
         self.previous_distance = np.inf  # Track the previous distance to the goal for progress reward
+        self.previous_position = None  # Track the robot's position for directional rewards
+
 
     def reset(self, seed=None):
         if seed is not None:
@@ -38,29 +40,42 @@ class CustomEnv(gym.Env):
         observation = np.concatenate((robot_position, self.goal_position), axis=0).astype(np.float32)
         self.current_step = 0
         self.previous_distance = np.linalg.norm(robot_position - self.goal_position)  # Track the initial distance
-        
+        self.previous_position = robot_position  # Initialize the robot's previous position
+
         info = {}
         return observation, info
 
+
     def compute_reward(self, robot_position):
+        """Compute the reward based on the robot's distance to the goal and progress."""
         distance_to_goal = np.linalg.norm(robot_position - self.goal_position)
-        
-        # Directional reward to encourage moving towards the goal
+
+        # Progressive reward for getting closer to the goal
+        progress_reward = (self.previous_distance - distance_to_goal) * 100  # Encourages steady progress
+
+        # Directional reward (dot product to encourage movement toward goal)
         movement_vector = robot_position - self.previous_position
         goal_vector = self.goal_position - self.previous_position
         direction_reward = np.dot(movement_vector, goal_vector) / (np.linalg.norm(goal_vector) + 1e-6)
-        
-        # Scale rewards
-        reward = -distance_to_goal * 100 + direction_reward * 50
-        
-        # Bonus for reaching the goal
-        if distance_to_goal <= 0.001:
-            reward += 100
-        
-        self.previous_distance = distance_to_goal  # Update previous distance for next step
-        
-        return reward
+        direction_reward *= 50  # Scale for impact
 
+        # Efficiency reward (penalize unnecessary movement)
+        efficiency_penalty = -np.linalg.norm(movement_vector) * 0.1  # Penalize excessive movement
+
+        # Task completion reward
+        completion_reward = 100 if distance_to_goal <= 0.001 else 0
+
+        # Small time penalty to encourage faster task completion
+        time_penalty = -0.01  
+
+        # Total reward
+        reward = progress_reward + direction_reward + efficiency_penalty + completion_reward + time_penalty
+
+        # Update previous values for next step
+        self.previous_distance = distance_to_goal
+        self.previous_position = robot_position
+
+        return reward
 
 
     def step(self, action):
